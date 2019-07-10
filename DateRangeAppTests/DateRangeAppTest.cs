@@ -9,6 +9,15 @@ namespace DateRangeAppTests
     public class DateRangeAppTest
     { 
         [TestMethod]
+        public void TrySplitDates()
+        {
+            string dates = "24.12.1223 17.03.2006";
+            Program p = new Program();
+            string[] actualDates = p.TrySplitDates(dates);
+            Assert.IsTrue(actualDates.Length ==2);
+        }
+
+        [TestMethod]
         public void TryParseDateToFormatTest()
         {
             string date = "24.12.1223";

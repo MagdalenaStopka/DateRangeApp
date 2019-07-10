@@ -8,24 +8,40 @@ namespace DateRangeApp
     public class Program
     {
         string period = "";
+        string[] _dates = new string[2] ;
         public static void Main(string[] args)
         {
             Program p = new Program();
-            Console.WriteLine("Please enter dates in format: dd.MM.yyyy");
-            Console.WriteLine("Please enter start date:");
-            string startDate = Console.ReadLine();
+            
+            Console.WriteLine("Enter your two dates in format dd.MM.yyyy dd.MM.yyyy :");
+            string dates = Console.ReadLine();
+            p.TrySplitDates(dates);
+            string startDate = p._dates[0];
+            string endDate = p._dates[1];
+            
             DateTime _startDate = p.TryParseDateToFormat(startDate);
-
-            Console.WriteLine("Please enter end date:");
-            string endDate = Console.ReadLine();
             DateTime _endDate = p.TryParseDateToFormat(endDate);
-
             p.CheckDateRange(_startDate, _endDate);
             p.DateRange(_startDate, _endDate);
             Console.WriteLine("The date range:");
             Console.WriteLine(p.period);
             Console.ReadKey();
         }
+
+        public string[] TrySplitDates( string dates)
+        {
+            _dates = dates.Split(' ');
+       
+            if (_dates.Length != 2)
+            {
+                throw new Exception("Incorrect number of dates is entered ");
+            }
+            else
+            {
+                return _dates;
+            }
+        }
+
         public DateTime TryParseDateToFormat(string date)
         {
             try
